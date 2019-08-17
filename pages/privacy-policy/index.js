@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import dynamic from 'next/dynamic'
 
 import Loader from 'components/elements/loader'
-import { DESCRIPTIONS, COMPANY, URL, DPM_EMAIL } from '../../config'
+import { DESCRIPTIONS, COMPANY, URL, DPM_EMAIL } from 'config'
 import { t } from 'translations'
 import { errorDispatcher, localeDispatcher } from 'store/helpers'
 import Par from 'components/elements/par'

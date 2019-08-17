@@ -97,7 +97,9 @@ export default {
     msgInvalid: 'Invalid message',
     resetTokenReq: 'Password reset token is required',
     resetTokenInvalid: 'Invalid password reset token',
-    subscribed: 'This email is already subscribed.'
+    subscribed: 'This email is already subscribed.',
+    confirmRequired: 'Account confirmation token is required',
+    confirmInvalid: 'Invalid account confirmation token'
   },
   subscribe: {
     placeholder: 'Enter your email address'

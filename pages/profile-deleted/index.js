@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { bindActionCreators } from 'redux'
 
 import Loader from 'components/elements/loader'
-import { DESCRIPTIONS, URL } from '../../config'
+import { DESCRIPTIONS, URL } from 'config'
 import { t } from 'translations'
 import { setError } from 'store/actions'
 import { errorDispatcher, localeDispatcher } from 'store/helpers'

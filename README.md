@@ -1,5 +1,7 @@
 # Users Cubed NEXT Frontend
 
+Note. This version is not yet tested, master branch is development branch.
+
 ## Features
 
 Fully featured React.js SSR user management system (frontend).
@@ -19,6 +21,8 @@ TODO:
 * upload field/ avatar field
 * fast theme changes
 * improved locale swicthing
+* fix export (+ sitemap -> routeMap ?)
+* fix signout button
 * tests
 
 ## Technologies

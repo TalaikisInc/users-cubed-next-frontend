@@ -33,5 +33,34 @@ module.exports = withCSS(withTM(withSourceMaps({
     config.resolve.modules.push(resolve(__dirname, './'))
     return config
   },
-  transpileModules: ['react-spinners']
+  transpileModules: ['react-spinners'],
+  // exportTrailingSlash: true
+  /*
+  exportPathMap: async function (defaultPathMap,{ dev, dir, outDir, distDir, buildId }) {
+    return {
+      '/': { page: '/' },
+      '/about': { page: '/about' },
+      '/error': { page: '/error' },
+      '/confirm': { page: '/confirm' },
+      '/refer': { page: '/refer' },
+      '/profile-edit': { page: '/profile-edit' },
+      '/refer-use': { page: '/refer-use' },
+      '/reset': { page: '/reset' },
+      '/dashboard': { page: '/dashboard' },
+      '/confirm-reset': { page: '/confirm-reset' },
+      '/privacy-policy': { page: '/privacy-policy' },
+      '/terms-and-conditions': { page: '/terms-and-conditions' },
+      '/disclaimer': { page: '/disclaimer' },
+      '/referred': { page: '/referred' },
+      '/signin': { page: '/signin' },
+      '/signup': { page: '/signup' },
+      '/xss-report': { page: '/xss-report' },
+      '/report-cert-transparency': { page: '/report-cert-transparency' },
+      '/contact-us': { page: '/contact-us' },
+      '/not-found': { page: '/not-found' },
+      '/signed-out': { page: '/signed-out' },
+      '/profile-deleted': { page: '/profile-deleted' },
+    }
+  }
+  */
 })))

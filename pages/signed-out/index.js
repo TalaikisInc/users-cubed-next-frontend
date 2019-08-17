@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import dynamic from 'next/dynamic'
 
-import { DESCRIPTIONS, URL } from '../../config'
+import { DESCRIPTIONS, URL } from 'config'
 import { t } from 'translations'
 import { errorDispatcher, localeDispatcher } from 'store/helpers'
 import Par from 'components/elements/par'
