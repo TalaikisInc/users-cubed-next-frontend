@@ -5,7 +5,7 @@ const withCSS = require('@zeit/next-css')
 const withSourceMaps = require('@zeit/next-source-maps')
 
 module.exports = withCSS(withTM(withSourceMaps({
-  webpack (config, options) {
+  webpack (config, { dev }) {
     const originalEntry = config.entry
     config.entry = async () => {
       const entries = await originalEntry()
@@ -31,9 +31,10 @@ module.exports = withCSS(withTM(withSourceMaps({
     config.plugins.push(new WebpackBundleSizeAnalyzerPlugin('stats.txt'))
 
     config.resolve.modules.push(resolve(__dirname, './'))
+
     return config
   },
-  transpileModules: ['react-spinners'],
+  transpileModules: ['react-spinners']
   // exportTrailingSlash: true
   /*
   exportPathMap: async function (defaultPathMap,{ dev, dir, outDir, distDir, buildId }) {

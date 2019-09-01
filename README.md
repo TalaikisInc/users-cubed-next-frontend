@@ -23,6 +23,7 @@ Note. This project is SSR only, not using CSR part from Next.js, therefore, all 
 TODO:
 
 * fix static resources drop ove higher load
+* drop express
 * social login (+backend part)
 * refer system (left: REFER_USE -> REFER_REGISTER, REFERRED)
 * upload field/ avatar field
@@ -31,6 +32,17 @@ TODO:
 * fix export (+ sitemap -> routeMap ?)
 * fix signout button
 * tests
+* improve nginx:
+
+```nginx
+upstream cubed {
+    ip_hash;
+    server 127.0.0.1:8000;
+    server 127.0.0.1:8001;
+    server 127.0.0.1:8002;
+    server 1.1.1.1:8000;
+}
+```
 
 ## Technologies
 
