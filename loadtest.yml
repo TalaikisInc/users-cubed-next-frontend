@@ -1,0 +1,15 @@
+config:
+  target: "https://cubed.talaikis.com"
+  phases:
+    - duration: 60
+      arrivalRate: 50
+    - duration: 120
+      arrivalRate: 5
+      rampTo: 50
+    - duration: 600
+      arrivalRate: 50
+scenarios:
+  - name: "Access first page."
+    flow:
+      - get:
+          url: "/"

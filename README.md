@@ -22,6 +22,7 @@ Note. This project is SSR only, not using CSR part from Next.js, therefore, all 
 
 TODO:
 
+* fix static resources drop ove higher load
 * social login (+backend part)
 * refer system (left: REFER_USE -> REFER_REGISTER, REFERRED)
 * upload field/ avatar field
