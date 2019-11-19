@@ -107,7 +107,7 @@ npm run test
 ## Sitemap generator
 
 ```bash
-# will generate a sitempa inside static/ folder along with additional out.json and erros.json files
+# will generate a sitemap inside public/ folder along with additional out.json and erros.json files
 node sitemap/
 ```
 

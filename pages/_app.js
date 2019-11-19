@@ -8,9 +8,9 @@ import Router from 'next/router'
 
 import { GA_TRACKING_ID, PROD } from 'config'
 import withReduxStore from 'store/withReduxStore'
-import 'static/css/themify.css'
-import 'static/css/animate.css'
-import 'static/css/color1.css'
+import 'public/css/themify.css'
+import 'public/css/animate.css'
+import 'public/css/color1.css'
 
 class CustomApp extends App {
   initGA () {

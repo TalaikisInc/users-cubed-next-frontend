@@ -61,7 +61,7 @@ export const DESCRIPTIONS = {
 }
 
 export const SOCIAL = {
-  facebook: {
+  fb: {
     url: 'https://www.facebook.com'
   },
   twitter: {

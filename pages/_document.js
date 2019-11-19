@@ -13,7 +13,7 @@ class CustomDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+          <link rel="icon" type="image/x-icon" href="/public/favicon.ico" />
           <meta name="google-site-verification" content="HduKdZO6t6LohVq2L3zFPo6bz92WUFGpv9YLrNJth6U" />
           { PROD ? <Fragment>
             <script data-cfasync="false" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async />

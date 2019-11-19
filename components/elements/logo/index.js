@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { LOGO_ALT, URL } from 'config'
-import logo from 'static/logo.svg'
+import logo from 'public/logo.svg'
 
 export default () => (
   <div className="brand-logo">

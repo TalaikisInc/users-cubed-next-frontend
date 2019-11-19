@@ -5,7 +5,7 @@ const withCSS = require('@zeit/next-css')
 const withSourceMaps = require('@zeit/next-source-maps')
 
 module.exports = withCSS(withTM(withSourceMaps({
-  webpack (config, { dev }) {
+  webpack (config) {
     const originalEntry = config.entry
     config.entry = async () => {
       const entries = await originalEntry()

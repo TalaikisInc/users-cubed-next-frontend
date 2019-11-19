@@ -71,16 +71,16 @@ class Subscribe extends Component {
               <div className="col-lg-6">
                 <div className="subscribe">
                   <div>
-                    <h4>KNOW IT ALL FIRST!</h4>
-                    <Par>Never Miss Discounts From our Store By Signing Up To Our Newsletter. </Par>
+                    <h4>Lorem ipsum</h4>
+                    <Par>Lorem ipsum </Par>
                   </div>
                 </div>
               </div>
               <div className="col-lg-6">
-                { status ? <Message>{ status }</Message> :
-                  <form className="form-inline subscribe-form" onSubmit={this._submit}>
+                { status ? <Message>{ status }</Message>
+                  : <form className="form-inline subscribe-form" onSubmit={this._submit}>
                     <Field name="email" type="email" component={InputBasic} autoComplete="email" placeholder="Enter your email address" />
-                    <Submit label="Get a discount" loading={loading} />
+                    <Submit label="Subscribe" loading={loading} />
                   </form>
                 }
               </div>
