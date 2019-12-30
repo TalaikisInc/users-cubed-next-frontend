@@ -11,6 +11,7 @@ import { DESCRIPTIONS, URL } from 'config'
 import { signin, setError } from 'store/actions'
 import { t } from 'translations'
 import { errorDispatcher, localeDispatcher } from 'store/helpers'
+import { getLocale, getAuthStatus } from 'store/selectors'
 const Page = dynamic(() => import('components/layout/page'), { loading: () => <Loader /> })
 
 class Signin extends Component {
@@ -57,8 +58,8 @@ class Signin extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  locale: state.utils.locale,
-  isAuthenticated: state.auth.isAuthenticated
+  locale: getLocale(state),
+  isAuthenticated: getAuthStatus(state)
 })
 
 const mapDispatchToProps = (dispatch) => (

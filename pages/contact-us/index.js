@@ -12,6 +12,7 @@ import { t } from 'translations'
 import { contact, setError, setStatus } from 'store/actions'
 import { errorDispatcher, localeDispatcher } from 'store/helpers'
 import Message from 'components/elements/message'
+import { getLocale, getStatus } from 'store/selectors'
 const Page = dynamic(() => import('components/layout/page'), { loading: () => <Loader /> })
 
 class ContactUs extends Component {
@@ -57,8 +58,8 @@ class ContactUs extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  status: state.utils.status,
-  locale: state.utils.locale
+  status: getStatus(state),
+  locale: getLocale(state)
 })
 
 const mapDispatchToProps = (dispatch) => (

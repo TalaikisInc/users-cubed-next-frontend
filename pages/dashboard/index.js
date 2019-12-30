@@ -8,6 +8,7 @@ import { t } from 'translations'
 import { getUser } from 'store/actions'
 import { isServer } from 'utils/utils'
 import { errorDispatcher, localeDispatcher } from 'store/helpers'
+import { getCurrentUser, getLocale } from 'store/selectors'
 const Page = dynamic(() => import('components/layout/page'), { loading: () => <Loader /> })
 
 class Dashboard extends Component {
@@ -45,15 +46,15 @@ class Dashboard extends Component {
             <p><strong><a href={refUrl}>{ t('refer.title') }</a></strong></p>
             <p><strong><a href={refsUrl}>{ t('refer.list') }</a></strong></p>
           </Fragment>
-          }
+        }
       </Page>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  currentUser: state.auth.currentUser,
-  locale: state.utils.locale
+  currentUser: getCurrentUser(state),
+  locale: getLocale(state)
 })
 
 const mapDispatchToProps = (dispatch) => (

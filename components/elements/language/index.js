@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import { locales } from 'translations'
 import { setLanguage } from 'store/actions'
-import { bindActionCreators } from 'redux'
+import { getLocale } from 'store/selectors'
 
 class SelectLanguage extends Component {
   constructor (props) {
@@ -43,7 +44,7 @@ class SelectLanguage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  locale: state.utils.locale
+  locale: getLocale(state)
 })
 
 const mapDispatchToProps = (dispatch) => (

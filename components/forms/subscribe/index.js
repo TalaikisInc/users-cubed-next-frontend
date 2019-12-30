@@ -12,6 +12,7 @@ import { setError, setStatus, setLoading } from 'store/actions'
 import Par from 'components/elements/par'
 import { t } from 'translations'
 import { MAILCHIMP_URL } from 'config'
+import { getStatus, getLoading } from 'store/selectors'
 const getAjaxUrl = (url) => url.replace('/post?', '/post-json?')
 
 const validate = (values) => {
@@ -93,8 +94,8 @@ class Subscribe extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  status: state.utils.status,
-  loading: state.utils.loading
+  status: getStatus(state),
+  loading: getLoading(state)
 })
 
 const mapDispatchToProps = (dispatch) => (

@@ -7,6 +7,7 @@ import { DESCRIPTIONS, COMPANY, URL, DPM_EMAIL } from 'config'
 import { t } from 'translations'
 import { errorDispatcher, localeDispatcher } from 'store/helpers'
 import Par from 'components/elements/par'
+import { getLocale } from 'store/selectors'
 const Page = dynamic(() => import('components/layout/page'), { loading: () => <Loader /> })
 
 class PrivacyPolicy extends Component {
@@ -259,7 +260,7 @@ class PrivacyPolicy extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  locale: state.utils.locale
+  locale: getLocale(state)
 })
 
 export default connect(mapStateToProps, null)(PrivacyPolicy)

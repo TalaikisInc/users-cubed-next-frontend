@@ -7,10 +7,11 @@ import { bindActionCreators } from 'redux'
 import Loader from 'components/elements/loader'
 import ReferForm from 'components/forms/refer'
 import { DESCRIPTIONS, URL } from 'config'
-import { refer, setError } from 'store/actions'
+import { refer, setError, setStatus } from 'store/actions'
 import { t } from 'translations'
 import { errorDispatcher, localeDispatcher } from 'store/helpers'
 import Message from 'components/elements/message'
+import { getLocale, getStatus } from 'store/selectors'
 const Page = dynamic(() => import('components/layout/page'), { loading: () => <Loader /> })
 
 class Refer extends Component {
@@ -43,15 +44,15 @@ class Refer extends Component {
     return (
       <Page title={t('refer.title')} description={DESCRIPTIONS.refer} path={url} locale={locale}>
         { status ? <Message>{t('refer.complete')}</Message> : null }
-          <ReferForm handleSubmit={this._submit} />
+        <ReferForm handleSubmit={this._submit} />
       </Page>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  locale: state.utils.locale,
-  status: state.utils.status
+  locale: getLocale(state),
+  status: getStatus(state)
 })
 
 const mapDispatchToProps = (dispatch) => (

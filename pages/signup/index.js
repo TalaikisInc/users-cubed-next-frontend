@@ -11,6 +11,7 @@ import { t } from 'translations'
 import { signup, setError, setStatus } from 'store/actions'
 import { errorDispatcher, localeDispatcher } from 'store/helpers'
 import Message from 'components/elements/message'
+import { getLocale, getStatus } from 'store/selectors'
 const Page = dynamic(() => import('components/layout/page'), { loading: () => <Loader /> })
 
 class Signup extends Component {
@@ -54,8 +55,8 @@ class Signup extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  locale: state.utils.locale,
-  status: state.utils.status
+  locale: getLocale(state),
+  status: getStatus(state)
 })
 
 const mapDispatchToProps = (dispatch) => (

@@ -5,6 +5,7 @@ import TopBar from 'components/elements/topbar'
 import Hamburger from 'components/elements/hamburger'
 import { isServer } from 'utils/utils'
 import Logo from 'components/elements/logo'
+import { getAuthStatus } from 'store/selectors'
 
 class Header extends Component {
   constructor (props) {
@@ -36,10 +37,12 @@ class Header extends Component {
   }
 
   render () {
+    const isAuthenticated = this.props.isAuthenticated
+
     return (
       <header id="sticky" className="sticky">
         <div className="mobile-fix-option"></div>
-        <TopBar />
+        <TopBar isAuthenticated={isAuthenticated} />
         <div className="container">
           <div className="row">
             <div className="col-sm-12">
@@ -69,7 +72,7 @@ class Header extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: getAuthStatus(state)
 })
 
 export default connect(mapStateToProps, null)(Header)

@@ -11,6 +11,7 @@ import { editUser, setError, setStatus } from 'store/actions'
 import ProfileEditForm from 'components/forms/profile-edit'
 import { errorDispatcher, localeDispatcher } from 'store/helpers'
 import Message from 'components/elements/message'
+import { getCurrentUser, getLocale, getStatus } from 'store/selectors'
 const Page = dynamic(() => import('components/layout/page'), { loading: () => <Loader /> })
 
 class ProfileEdit extends Component {
@@ -63,9 +64,9 @@ class ProfileEdit extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  locale: state.utils.locale,
-  status: state.utils.status,
-  currentUser: state.auth.currentUser
+  locale: getLocale(state),
+  status: getStatus(state),
+  currentUser: getCurrentUser(state)
 })
 
 const mapDispatchToProps = (dispatch) => (

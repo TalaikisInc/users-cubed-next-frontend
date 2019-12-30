@@ -2,20 +2,20 @@ export const PROD = true
 export const DEBUG = !PROD
 
 export const STORAGE_ID = 'test'
-export const URL = PROD ? 'https://test.com' : 'http://127.0.0.1:3000' // w/o trailing slash
-export const IMAGES_URL = 'https://test.com/static/images/'
-export const API_URL = PROD ? 'https://api.test.com/' : 'http://localhost:3000/api'
-export const COMPANY_EMAIL = 'info@test.com'
+export const URL = PROD ? 'https://cubed.talaikis.com' : 'http://127.0.0.1:3000' // w/o trailing slash
+export const IMAGES_URL = 'https://cubed.talaikis.com/public/images/'
+export const API_URL = PROD ? 'https://ucapi.talaikis.com' : 'http://localhost:3001'
+export const COMPANY_EMAIL = 'info@talaikis.com'
 export const DEFAULT_DESCRIPTION = 'The Company'
-export const DEFAULT_IMAGE = 'default.jpeg'
 export const TITLE = 'The Company'
 export const COMPANY = 'Company Ltd.'
 export const COMPANY_ADDRESS = ''
-export const DPM_EMAIL = 'privacy@test.com'
+export const DPM_EMAIL = 'privacy@talaikis.com'
+export const DEFAULT_IMAGE = 'default.jpg'
 
 export const UPLOAD_API_URL = PROD ? 'https://test.test.com/' : 'http://localhost:3000/upload'
 export const CONTACT_API_URL = PROD ? 'https://test.test.com/contactus' : 'http://localhost:3000/contactus'
-export const NEXT_SERVER_API_KEY = 'test'
+export const NEXT_SERVER_API_KEY = 'cEPHDFKxwxaL7cAVZFQt'
 export const NEXT_SERVER_UPLOAD_API_KEY = 'test'
 export const NEXT_SERVER_CONTACT_API_KEY = 'test='
 
@@ -47,17 +47,7 @@ export const DESCRIPTIONS = {
     deleted: `${TITLE}'s profile deleted page.`
   },
   search: 'Search Results',
-  refer: 'Refer users.',
-  secureShopping: 'Secure Shopping.',
-  shippingReturns: 'Shipping and Returns.',
-  discounts: 'Top discounts',
-  bestsellers: 'Best Sellers',
-  popular: 'Highly rated products.',
-  cheapest: 'Cheapest Products',
-  expensive: 'Most Expensive Products',
-  category: 'Category general desription.',
-  categories: 'Product categories.',
-  image: 'Image page.'
+  refer: 'Refer users.'
 }
 
 export const SOCIAL = {
@@ -75,7 +65,7 @@ export const SOCIAL = {
   }
 }
 
-export const LOGO_ALT = 'Ufunc Shop'
+export const LOGO_ALT = 'Users Cubed'
 
 export const ADSENSE_SLOTS = {
 }

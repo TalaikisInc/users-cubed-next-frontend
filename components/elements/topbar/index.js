@@ -1,17 +1,18 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-
-import { t } from 'translations'
-import Signout from '../signout'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+
+import { t } from 'translations'
+import Signout from 'components/elements/signout'
+import { URL } from 'config'
 
 class TopBar extends Component {
   render () {
     const { isAuthenticated, locale } = this.props
-    const signinUrl = locale !== 'en' ? `${URL}/signin/${locale}` : `${URL}/signin`
-    const signupUrl = locale !== 'en' ? `${URL}/signup/${locale}` : `${URL}/signup`
-    const accUrl = locale !== 'en' ? `${URL}/dashboard/${locale}` : `${URL}/dashboard`
+    const signinUrl = locale && locale !== 'en' ? `${URL}/signin/${locale}` : `${URL}/signin`
+    const signupUrl = locale && locale !== 'en' ? `${URL}/signup/${locale}` : `${URL}/signup`
+    const accUrl = locale && locale !== 'en' ? `${URL}/dashboard/${locale}` : `${URL}/dashboard`
 
     return (
       <div className="top-header">

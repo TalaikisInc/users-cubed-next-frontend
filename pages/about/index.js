@@ -9,6 +9,7 @@ import { DESCRIPTIONS, URL } from 'config'
 import { t } from 'translations'
 import { setError } from 'store/actions'
 import { errorDispatcher, localeDispatcher } from 'store/helpers'
+import { getLocale } from 'store/selectors'
 const Page = dynamic(() => import('components/layout/page'), { loading: () => <Loader /> })
 
 class About extends Component {
@@ -33,7 +34,7 @@ class About extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  locale: state.utils.locale
+  locale: getLocale(state)
 })
 
 const mapDispatchToProps = (dispatch) => (

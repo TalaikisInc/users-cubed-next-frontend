@@ -1,5 +1,5 @@
 #!/bin/bash
 
-APP=frontend
+APP=cubed
 
 docker build --no-cache -t "$APP" .

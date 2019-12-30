@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import isemail from 'isemail'
+import isEmail from 'isemail'
 import { connect } from 'react-redux'
 import dynamic from 'next/dynamic'
 import { bindActionCreators } from 'redux'
@@ -11,6 +11,7 @@ import { t } from 'translations'
 import { contact, setError, setStatus } from 'store/actions'
 import { errorDispatcher, localeDispatcher } from 'store/helpers'
 import Message from 'components/elements/message'
+import { getLocale, getStatus } from 'store/selectors'
 const Page = dynamic(() => import('components/layout/page'), { loading: () => <Loader /> })
 
 class XSSReport extends Component {
@@ -31,7 +32,7 @@ class XSSReport extends Component {
     const name = target[0].value
     const email = target[1].value
     const message = target[2].value
-    if (isemail.validate(email) && name && name.length > 3 && message && message.length > 10) {
+    if (isEmail.validate(email) && name && name.length > 3 && message && message.length > 10) {
       this.props.contact({ name, email, message })
     } else {
       this.props.setError(t('error.empty'))
@@ -53,8 +54,8 @@ class XSSReport extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  locale: state.utils.locale,
-  status: state.utils.status
+  locale: getLocale(state),
+  status: getStatus(state)
 })
 
 const mapDispatchToProps = (dispatch) => (

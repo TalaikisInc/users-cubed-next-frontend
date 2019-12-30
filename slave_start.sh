@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APP=frontend
-PORT=3001
+APP=cubed
+PORT=3008
 
 docker run -it -p "$PORT:3000" --restart always --name "$APP" -d "$APP"

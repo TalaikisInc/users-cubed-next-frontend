@@ -6,6 +6,7 @@ import { DESCRIPTIONS, URL } from 'config'
 import { t } from 'translations'
 import { errorDispatcher, localeDispatcher } from 'store/helpers'
 import Par from 'components/elements/par'
+import { getLocale } from 'store/selectors'
 const Page = dynamic(() => import('components/layout/page'), { loading: () => <Loader /> })
 
 class SignedOut extends Component {
@@ -29,7 +30,7 @@ class SignedOut extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  locale: state.utils.locale
+  locale: getLocale(state)
 })
 
 export default connect(mapStateToProps, null)(SignedOut)

@@ -10,6 +10,7 @@ import { t } from 'translations'
 import { confirmReset, setError } from 'store/actions'
 import { errorDispatcher, localeDispatcher } from 'store/helpers'
 import Message from 'components/elements/message'
+import { getStatus, getLoading } from 'store/selectors'
 const Page = dynamic(() => import('components/layout/page'), { loading: () => <Loader /> })
 
 class ConfirmReset extends Component {
@@ -39,7 +40,7 @@ class ConfirmReset extends Component {
   }
 
   render () {
-    const { status, locale } = this.props
+    const { status, locale, loading } = this.props
     const url = locale !== 'en' ? `${URL}/confirm-reset/${locale}` : `${URL}/confirm-reset`
     const signinUrl = locale !== 'en' ? `${URL}/signin/${locale}` : `${URL}/signin`
 
@@ -54,7 +55,8 @@ class ConfirmReset extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  status: state.utils.status
+  status: getStatus(state),
+  loading: getLoading(state)
 })
 
 const mapDispatchToProps = (dispatch) => (

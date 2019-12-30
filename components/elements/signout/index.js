@@ -4,6 +4,7 @@ import Router from 'next/router'
 import { bindActionCreators } from 'redux'
 
 import { signoutUser, setError } from 'store/actions'
+import { getCurrentUser } from 'store/selectors'
 
 class Signout extends Component {
   constructor (props) {
@@ -32,7 +33,7 @@ class Signout extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  currentUser: state.auth.currentUser
+  currentUser: getCurrentUser(state)
 })
 
 const mapDispatchToProps = (dispatch) => (

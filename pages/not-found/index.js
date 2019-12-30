@@ -7,6 +7,7 @@ import { t } from 'translations'
 import { errorDispatcher, localeDispatcher } from 'store/helpers'
 import { URL } from 'config'
 import Par from 'components/elements/par'
+import { getLocale } from 'store/selectors'
 const Page = dynamic(() => import('components/layout/page'), { loading: () => <Loader /> })
 
 class NotFound extends Component {
@@ -29,7 +30,7 @@ class NotFound extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  locale: state.utils.locale
+  locale: getLocale(state)
 })
 
 export default connect(mapStateToProps, null)(NotFound)

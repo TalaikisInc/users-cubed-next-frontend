@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import dialCodes from 'utils/dialCodes'
+import { getCurrentUser } from 'store/selectors'
 
 class SelectDial extends Component {
   constructor (props) {
@@ -75,7 +76,7 @@ SelectDial.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  currentUser: state.auth.currentUser
+  currentUser: getCurrentUser(state)
 })
 
 export default connect(mapStateToProps, null)(SelectDial)

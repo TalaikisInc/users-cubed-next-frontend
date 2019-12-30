@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import { getCurrentUser } from 'store/selectors'
+
 class InputField extends Component {
   constructor (props) {
     super(props)
@@ -53,7 +55,7 @@ InputField.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  currentUser: state.auth.currentUser
+  currentUser: getCurrentUser(state)
 })
 
 export default connect(mapStateToProps, null)(InputField)

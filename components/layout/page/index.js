@@ -8,6 +8,7 @@ import Header from 'components/layout/header'
 import CubedFooter from 'components/layout/footer'
 import { COMPANY } from 'config'
 import Loader from 'components/elements/loader'
+import { getLoading } from 'store/selectors'
 
 class Page extends Component {
   render () {
@@ -49,7 +50,7 @@ Page.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  loading: state.utils.loading
+  loading: getLoading(state)
 })
 
 export default connect(mapStateToProps, null)(withRouter(Page))

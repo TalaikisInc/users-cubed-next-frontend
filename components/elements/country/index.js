@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import countries from 'utils/countries'
+import { getCurrentUser } from 'store/selectors'
 
 class SelectCountry extends Component {
   constructor (props) {
@@ -57,7 +58,7 @@ SelectCountry.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  currentUser: state.auth.currentUser
+  currentUser: getCurrentUser(state)
 })
 
 export default connect(mapStateToProps, null)(SelectCountry)

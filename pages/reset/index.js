@@ -12,6 +12,7 @@ import { t } from 'translations'
 import { reset, setError, setStatus } from 'store/actions'
 import { errorDispatcher, localeDispatcher } from 'store/helpers'
 import Message from 'components/elements/message'
+import { getLocale, getStatus } from 'store/selectors'
 const Page = dynamic(() => import('components/layout/page'), { loading: () => <Loader /> })
 
 class Reset extends Component {
@@ -24,7 +25,7 @@ class Reset extends Component {
     errorDispatcher(reduxStore, err)
     localeDispatcher(reduxStore, query)
     if (!isServer) {
-      reduxStore.dispatch(setResetStatus(false))
+      reduxStore.dispatch(setStatus(false))
     }
     return { }
   }
@@ -56,8 +57,8 @@ class Reset extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  locale: state.utils.locale,
-  status: state.utils.status
+  locale: getLocale(state),
+  status: getStatus(state)
 })
 
 const mapDispatchToProps = (dispatch) => (

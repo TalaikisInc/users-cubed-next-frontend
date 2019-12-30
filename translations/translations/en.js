@@ -25,6 +25,7 @@ export default {
     avatar: 'Avatar',
     toc: 'I agree to the '
   },
+  my_account: 'My Account',
   signup: {
     now: 'You can now ',
     done: 'Account is registered, please check your email and ',
@@ -48,14 +49,14 @@ export default {
   },
   confirm: {
     title: 'Confirm',
-    done: 'Account confirmed, you can now ',
+    done: 'Account confirmed, you can now '
   },
   reset: {
     title: 'Reset Password',
     password: 'Password was reset. Email asking to ',
     sent: ' the password reset is sent to you.',
     confirm: 'Confirm Password Reset',
-    confirmed: 'Password reset confirmed, your new password is emailed to you. Please check email and ',
+    confirmed: 'Password reset confirmed, your new password is emailed to you. Please check email and '
   },
   about: 'About',
   disclaimer: 'Disclaimer',

@@ -10,6 +10,7 @@ import { t } from 'translations'
 import { confirm, setError, setStatus } from 'store/actions'
 import { errorDispatcher, localeDispatcher } from 'store/helpers'
 import Message from 'components/elements/message'
+import { getLocale, getStatus } from 'store/selectors'
 const Page = dynamic(() => import('components/layout/page'), { loading: () => <Loader /> })
 
 class Confirm extends Component {
@@ -54,8 +55,8 @@ class Confirm extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  status: state.utils.status,
-  locale: state.utils.locale
+  status: getStatus(state),
+  locale: getLocale(state)
 })
 
 const mapDispatchToProps = (dispatch) => (
