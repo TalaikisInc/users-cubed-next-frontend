@@ -29,6 +29,8 @@ const _api = async (data, done) => {
       Authorization: auth ? `Bearer ${auth}` : ''
     }
   }
+  console.log('sending to api')
+  console.log(output)
 
   const body = await encodeRequest(output).catch(() => done(t('error.encoding')))
   const postParams = {
@@ -102,6 +104,5 @@ export const socialLogout = () => {
   if (!isServer) {
     window.localStorage.removeItem('id_token')
     window.localStorage.removeItem('access_token')
-    window.location.href = '/'
   }
 }

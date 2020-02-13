@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from 'react'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
 
 import { FRONTEND_URL } from 'config'
 import Loader from 'components/extensions/loader'
@@ -11,13 +12,33 @@ const Page = dynamic(() => import('components/layout/page'), { loading: () => <L
 const Dashboard = ({ locale }) => {
   setLocale(locale)
   const [globalState, globalActions] = useStore()
-  useEffect(() => globalActions.getUser(), [])
+  const router = useRouter()
+
+  useEffect(() => {
+    console.log('dashboard globalState.isAuthenticated')
+    console.log(globalState.isAuthenticated)
+    if (!globalState.isAuthenticated) {
+      if (typeof locale !== 'undefined' && locale !== 'en') {
+        router.push(`/signin/${locale}`)
+      } else {
+        router.push('/signin')
+      }
+    }
+    const getData = async () => {
+      await globalActions.getUser()
+    }
+    getData()
+  }, [])
 
   const en = locale !== 'en'
   const url = en ? `${FRONTEND_URL}/dashboard/${locale}` : `${FRONTEND_URL}/dashboard`
   const editUrl = en ? `${FRONTEND_URL}/profile-edit/${locale}` : `${FRONTEND_URL}/profile-edit`
   const refUrl = en ? `${FRONTEND_URL}/refer/${locale}` : `${FRONTEND_URL}/refer`
   const refsUrl = en ? `${FRONTEND_URL}/referred/${locale}` : `${FRONTEND_URL}/referred`
+  console.log('globalState.currentUser')
+  console.log(globalState.currentUser)
+  console.log('globalState.isAuthenticated')
+  console.log(globalState.isAuthenticated)
 
   return (
     <Page title={t('dashboard.title')} path={url} noCrawl>

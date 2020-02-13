@@ -15,8 +15,11 @@ Fully featured React.js SSR user management system/ CMS (frontend).
 * Account confirm, password reset
 * Terms and conditions. privacy policy, disclaimer examples
 * Contact form, etc. examples
+* Written in hooks (almost*)
 
 Note. This project is SSR only, not using CSR part from Next.js, therefore, all links are `<a href=` instead of `<Link href=`.
+
+* Next.js custom app doesn't support hooks
 
 ## Backend
 

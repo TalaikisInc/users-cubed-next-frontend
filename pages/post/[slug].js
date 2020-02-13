@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router'
-import dynamic from 'next/dynamic'
 
 import { setLocale } from 'translations'
 import useStore from 'store'
+import { errorDispatcher, localeDispatcher } from 'store/helpers'
 
 const Post = ({ locale }) => {
   setLocale(locale)
@@ -10,6 +10,12 @@ const Post = ({ locale }) => {
   const { pid } = router.query
 
   return <p>Post: {pid}</p>
+}
+
+Post.getInitialProps = async (ctx) => {
+  errorDispatcher(ctx)
+  const locale = localeDispatcher(ctx)
+  return { locale }
 }
 
 export default Post

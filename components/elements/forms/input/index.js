@@ -14,18 +14,31 @@ const InputField = ({ name, label, type, icon, autocomplete }) => {
   }
 
   const classes = globalState.error ? 'danger' : undefined
+  const disabled = typeof globalState.currentUser[name] === 'string'
 
   return (
-    <div className="input">
+    <div>
       <Label id={name}>{ label }</Label>
-      <Input
-        id={name}
-        className={classes}
-        name={name}
-        onChange={_onChange}
-        type={type}
-        placeholder={label}
-        autoComplete={autocomplete} />
+      { disabled ?
+        <Input
+          id={name}
+          className={classes}
+          name={name}
+          onChange={_onChange}
+          type={type}
+          placeholder={label}
+          value={globalState.currentUser[name]}
+          disabled
+          autoComplete={autocomplete} />
+        : <Input
+          id={name}
+          className={classes}
+          name={name}
+          onChange={_onChange}
+          type={type}
+          placeholder={label}
+          autoComplete={autocomplete} />
+      }
       <Error error={globalState.error} />
     </div>
   )

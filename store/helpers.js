@@ -1,4 +1,3 @@
-import Router from 'next/router'
 import { toast } from 'react-toastify'
 
 import { STORAGE_ID } from 'config'
@@ -16,8 +15,13 @@ export const localeDispatcher = (ctx) => {
     }
     return ctx.query.locale
   } else {
-    if (currentLocale !== null) {
+    if (typeof currentLocale !== 'undefined' && currentLocale !== null) {
       return currentLocale
+    } else {
+      if (!isServer) {
+        window.localStorage.setItem(`${STORAGE_ID}_locale`, 'en')
+      }
+      return 'en'
     }
   }
 }
@@ -26,8 +30,4 @@ export const errorDispatcher = (ctx) => {
   if (ctx.err) {
     toast.error(ctx.err)
   }
-}
-
-export const redirectOnError = (ctx) => {
-  typeof window !== 'undefined' ? Router.push('/') : ctx.res.writeHead(302, { Location: '/' }).end()
 }

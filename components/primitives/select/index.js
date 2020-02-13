@@ -8,7 +8,7 @@ const borderColors = styledMap`
   default: ${theme.colors.primaryDark};
 `
 
-export default styled.input`
+export default styled.select`
   width: 50%;
   padding: 12px 20px;
   margin: 8px 0;

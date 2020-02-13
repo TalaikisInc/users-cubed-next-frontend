@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import dynamic from 'next/dynamic'
 
 import { DESCRIPTIONS, FRONTEND_URL } from 'config'

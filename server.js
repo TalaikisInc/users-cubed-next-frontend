@@ -28,7 +28,6 @@ app.prepare().then(() => {
   // Serve static
   serveStatic('/favicon.ico')
   serveStatic('/ads.txt')
-  serveStatic('/logo.svg')
 
   // Primary language paths
   server.get('/', (req, res) => ssrCache({ req, res, pathname: '/', query: {} }))
@@ -55,6 +54,7 @@ app.prepare().then(() => {
   })
 
   // Other languages
+  // disclaimer, ToS and pribacu policy and not found are without custom locale
   server.get('/index/:locale', (req, res) => ssrCache({ req, res, pathname: '/', query: { locale: req.params.locale } }))
   server.get('/signup/:locale', (req, res) => ssrCache({ req, res, pathname: '/signup', query: { locale: req.params.locale } }))
   server.get('/signin/:locale', (req, res) => ssrCache({ req, res, pathname: '/signin', query: { locale: req.params.locale } }))
@@ -64,25 +64,18 @@ app.prepare().then(() => {
   server.get('/reset/:locale', (req, res) => ssrCache({ req, res, pathname: '/reset', query: { locale: req.params.locale } }))
   server.get('/refer/:locale', (req, res) => ssrCache({ req, res, pathname: '/refer', query: { locale: req.params.locale } }))
   server.get('/blog/:locale', (req, res) => ssrCache({ req, res, pathname: '/blog', query: { locale: req.params.locale } }))
-  server.get('/disclaimer/:locale', (req, res) => ssrCache({ req, res, pathname: '/disclaimer', query: { locale: req.params.locale } }))
   server.get('/profile-edit/:locale', (req, res) => ssrCache({ req, res, pathname: '/profile-edit', query: { locale: req.params.locale } }))
   server.get('/profile-deleted/:locale', (req, res) => ssrCache({ req, res, pathname: '/profile-deleted', query: { locale: req.params.locale } }))
   server.get('/signed-out/:locale', (req, res) => ssrCache({ req, res, pathname: '/signed-out', query: { locale: req.params.locale } }))
   server.get('/contact-us/:locale', (req, res) => ssrCache({ req, res, pathname: '/contact-us', query: { locale: req.params.locale } }))
   server.get('/report-cert-transparency/:locale', (req, res) => ssrCache({ req, res, pathname: '/report-cert-transparency', query: { locale: req.params.locale } }))
   server.get('/xss-report/:locale', (req, res) => ssrCache({ req, res, pathname: '/xss-report', query: { locale: req.params.locale } }))
-  server.get('/terms-and-conditions/:locale', (req, res) => ssrCache({ req, res, pathname: '/terms-and-conditions', query: { locale: req.params.locale } }))
-  server.get('/privacy-policy/:locale', (req, res) => ssrCache({ req, res, pathname: '/privacy-policy', query: { locale: req.params.locale } }))
-  server.get('/not-found/:locale', (req, res) => {
-    res.status(404)
-    ssrCache({ req, res, pathname: '/not-found', query: { locale: req.params.locale } })
-  })
 
   // second parameter
   server.get('/confirm/:token', (req, res) => ssrCache({ req, res, pathname: '/confirm', query: { token: req.params.token } }))
   server.get('/confirm/:token/:locale', (req, res) => ssrCache({ req, res, pathname: '/confirm', query: { token: req.params.token, locale: req.params.locale } }))
 
-  server.get('*', (req, res) => {
+  server.all('*', (req, res) => {
     return handler(req, res)
   })
 

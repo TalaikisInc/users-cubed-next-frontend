@@ -11,7 +11,7 @@ import Message from 'components/elements/forms/message'
 import useStore from 'store'
 const Page = dynamic(() => import('components/layout/page'), { loading: () => <Loader /> })
 
-const Signup  = () =>  {
+const Signup  = ({ locale }) =>  {
   setLocale(locale)
   const [globalState, globalActions] = useStore()
   const _submit = (e) => {
@@ -23,7 +23,7 @@ const Signup  = () =>  {
     const tosAgreement = target[3].value === 'true' ? '1' : '0'
     if (email && isEmail(email) && password && password.length > 11 && repeatPassword && tosAgreement) {
       console.log('calling signup')
-      globalActions.signup({ email, password, tosAgreement })
+      globalActions.signup({ email, password, tosAgreement, locale })
     } else {
       globalActions.setError(t('error.empty'))
     }
@@ -45,7 +45,7 @@ const Signup  = () =>  {
 Signup.getInitialProps = async (ctx) => {
   errorDispatcher(ctx)
   const locale = localeDispatcher(ctx)
-  return {}
+  return { locale }
 }
 
 export default Signup

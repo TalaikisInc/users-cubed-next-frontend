@@ -1,7 +1,7 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 
-import { COMPANY, UPDATE_FREQUENCY, DESCRIPTIONS, FRONTEND_URL } from 'config'
+import { COMPANY, DESCRIPTIONS, FRONTEND_URL } from 'config'
 import Loader from 'components/extensions/loader'
 import { t } from 'translations'
 import { Text } from 'components/primitives'
@@ -19,7 +19,6 @@ const Disclaimer = () => {
           <li><Text>No part of this website is intended to constitute a contractual offer capable of acceptance. No goods and / or services are sold through this website and product and / or service details are provided for information purposes only.</Text></li>
           <li><Text>Whilst every effort has been made to ensure that all graphical representations of products and / or descriptions of services available from { COMPANY } correspond to the actual products and / or services, { COMPANY } is not responsible for any variations from these descriptions.</Text></li>
           <li><Text>{ COMPANY } does not represent or warrant that such products and / or services will be available from us or our premises. For this reason, please contact us prior to visiting if you wish to enquire as to the availability of any products and / or services. Any such enquiry does not give rise to any express or implied warranty that the products and / or services forming the subject matter of your enquiry will be available upon your arrival at our premises.</Text></li>
-          <li><Text>All pricing information on the website is correct at the time of going online. { COMPANY } reserves the right to change prices and alter or remove any special offers from time to time and as necessary. All pricing information is reviewed and updated every { UPDATE_FREQUENCY } .</Text></li>
         </ol>
       </ol>
     </Page>

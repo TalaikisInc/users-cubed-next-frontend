@@ -18,10 +18,30 @@ const initialState = {
   state: {}
 }
 
+const setError = (store, error) => {
+  store.setState({ error, loading: false })
+  toast.error(error)
+}
+
+const signOut = async (store, token) => {
+  const o = {
+    body: {},
+    headers: { Action: 'TOKEN_DESTROY', Authorization: `Bearer ${token}` }
+  }
+  const decoded = await api(o).catch((e) => setError(store, e))
+  if (decoded && decoded.status === 'ok') {
+    if (!isServer) {
+      window.localStorage.removeItem(`${STORAGE_ID}_token`)
+    }
+    socialLogout()
+    store.setState({ loading: false, currentUser: {}, isAuthenticated: false })
+  }
+}
+
 const extendToken = async (token) => {
   const o = {
     body: { tokenId: token },
-    headers: { Action: 'TOKEN_EXTEND', Authorization: token }
+    headers: { Action: 'TOKEN_EXTEND', Authorization: `Bearer ${token}` }
   }
   await api(o).catch((e) => e)
 }
@@ -30,10 +50,7 @@ const actions = {
   setState: (store, state) => {
     store.setState({ state })
   },
-  setError: (store, error) => {
-    toast.error(error)
-    store.setState({ error, loading: false })
-  },
+  setError: setError,
   setLoading: (store, loading) => {
     store.setState({ loading })
   },
@@ -46,7 +63,7 @@ const actions = {
       body: { email, name, msg },
       headers: { Action: 'CONTACT_US' }
     }
-    const decoded = await api(o).catch((e) => store.setState({ error: e, loading: false }))
+    const decoded = await api(o).catch((e) => setError(store, e))
     if (decoded) {
       if (decoded.status === 'ok') {
         store.setState({ status: true, loading: false })
@@ -63,9 +80,9 @@ const actions = {
     if (token) {
       const o = {
         body: { to },
-        headers: { Action: 'REFER_REFER', Authorization: token }
+        headers: { Action: 'REFER_REFER', Authorization: `Bearer ${token}` }
       }
-      const decoded = await api(o).catch((e) => store.setState({ error: e, loading: false }))
+      const decoded = await api(o).catch((e) => setError(store, e))
       if (decoded && decoded.status === 'ok') {
         store.setState({ status: true, loading: false })
         await extendToken(token)
@@ -78,19 +95,34 @@ const actions = {
     if (!isServer) {
       token = window.localStorage.getItem(`${STORAGE_ID}_token`)
     }
+    console.log('token')
+    console.log(token)
 
     if (token) {
       const o = {
         body: { token },
-        headers: { Action: 'USER_GET', Authorization: token }
+        headers: { Action: 'USER_GET', Authorization: `Bearer ${token}` }
       }
-      const decoded = await api(o).catch((e) => store.setState({ error: e, loading: false }))
+      const decoded = await api(o).catch(async (e) => {
+        if (e === 'Unauthorized') {
+          if (!isServer) {
+            window.localStorage.removeItem(`${STORAGE_ID}_token`)
+          }
+          socialLogout()
+          await signOut(store, token)
+          store.setState({ isAuthenticated: false })
+        } else {
+          setError(store, e)
+        }
+      })
+      console.log('decoded')
+      console.log(decoded)
       if (decoded) {
-        store.setState({ loading: false, currentUser: decoded, isAuthorized: true })
+        store.setState({ loading: false, currentUser: decoded, isAuthenticated: true })
         await extendToken(token)
       }
     } else {
-      store.setState({ loading: false, error: t('error.token') })
+      setError(store, t('error.token'))
     }
   },
   editUser: async (store, { ...rest }) => {
@@ -103,15 +135,15 @@ const actions = {
     if (token) {
       const o = {
         body: { ...rest },
-        headers: { Action: 'USER_EDIT', Authorization: token }
+        headers: { Action: 'USER_EDIT', Authorization: `Bearer ${token}` }
       }
-      const decoded = await api(o).catch((e) => store.setState({ error: e, loading: false }))
+      const decoded = await api(o).catch((e) => setError(store, e))
       if (decoded) {
-        store.setState({ loading: false, currentUser: decoded, status: true })
+        store.setState({ loading: false, currentUser: decoded, status: true, isAuthenticated: true })
         await extendToken(token)
       }
     } else {
-      store.setState({ loading: false, error: t('error.token') })
+      setError(store, t('error.token'))
     }
   },
   deleteUser: async (store) => {
@@ -124,9 +156,9 @@ const actions = {
     if (token) {
       const o = {
         body: {},
-        headers: { Action: 'USER_DESTROY', Authorization: token }
+        headers: { Action: 'USER_DESTROY', Authorization: `Bearer ${token}` }
       }
-      const decoded = await api(o).catch((e) => store.setState({ error: e, loading: false }))
+      const decoded = await api(o).catch((e) => setError(store, e))
       if (decoded && decoded.status === 'ok') {
         if (!isServer) {
           window.localStorage.removeItem(`${STORAGE_ID}_token`)
@@ -143,29 +175,18 @@ const actions = {
     }
 
     if (token) {
-      const o = {
-        body: {},
-        headers: { Action: 'TOKEN_DESTROY', Authorization: token }
-      }
-      const decoded = await api(o).catch((e) => store.setState({ error: e, loading: false }))
-      if (decoded && decoded.status === 'ok') {
-        if (!isServer) {
-          window.localStorage.removeItem(`${STORAGE_ID}_token`)
-        }
-        socialLogout()
-        store.setState({ loading: false, currentUser: {}, isAuthenticated: false })
-      }
+      await signOut(store, token)
     } else {
-      store.setState({ loading: false, error: t('error.token') })
+      setError(store, t('error.token'))
     }
   },
-  signup: async (store, { email, password, tosAgreement }) => {
+  signup: async (store, { email, password, tosAgreement, locale }) => {
     const o = {
-      body: { email, password, tosAgreement, locale: 'en' },
+      body: { email, password, tosAgreement, locale },
       headers: { Action: 'USER_CREATE' }
     }
     store.setState({ loading: true })
-    const decoded = await api(o).catch((e) => store.setState({ error: e, loading: false }))
+    const decoded = await api(o).catch((e) => setError(store, e))
     if (decoded && decoded.status === 'ok') {
       store.setState({ loading: false, isAuthenticated: true })
     }
@@ -176,9 +197,10 @@ const actions = {
       body: { email, password },
       headers: { Action: 'TOKEN_CREATE' }
     }
-    const decoded = await api(o).catch((e) => store.setState({ error: e, loading: false }))
+    const decoded = await api(o).catch((e) => setError(store, e))
     if (decoded && typeof decoded.tokenId === 'string') {
       if (!isServer) {
+        console.log('setting on local storage')
         window.localStorage.setItem(`${STORAGE_ID}_token`, decoded.tokenId)
       }
       store.setState({ loading: false, isAuthenticated: true })
@@ -190,7 +212,7 @@ const actions = {
       body: { token },
       headers: { Action: 'CONFIRM' }
     }
-    const decoded = await api(o).catch((e) => store.setState({ error: e, loading: false }))
+    const decoded = await api(o).catch((e) => setError(store, e))
     if (decoded && decoded.status === 'ok') {
       store.setState({ loading: false, status: true })
     }
@@ -201,7 +223,7 @@ const actions = {
       body: { email },
       headers: { Action: 'RESET_CREATE' }
     }
-    const decoded = await api(o).catch((e) => store.setState({ error: e, loading: false }))
+    const decoded = await api(o).catch((e) => setError(store, e))
     if (decoded && decoded.status === 'ok') {
       store.setState({ loading: false, status: true })
     }
@@ -212,7 +234,7 @@ const actions = {
       body: { token },
       headers: { Action: 'CONFIRM' }
     }
-    const decoded = await api(o).catch((e) => store.setState({ error: e, loading: false }))
+    const decoded = await api(o).catch((e) => setError(store, e))
     if (decoded && decoded.status === 'ok') {
       store.setState({ loading: false, status: true })
     }
@@ -223,7 +245,7 @@ const actions = {
       body: { provider, idToken, accessToken },
       headers: { Action: 'USER_CREATE_SOCIAL' }
     }
-    const decoded = await api(o).catch((e) => store.setState({ error: e, loading: false }))
+    const decoded = await api(o).catch((e) => setError(store, e))
     if (decoded && decoded.status === 'ok') {
       store.setState({ loading: false, signupStatus: true })
     }

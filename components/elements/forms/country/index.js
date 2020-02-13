@@ -1,47 +1,55 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import { countries } from 'utils/objs'
 import Error from 'components/elements/forms/error'
+import useStore from 'store'
+import Select from 'components/primitives/select'
+import Label from 'components/primitives/label'
 
-class SelectCountry extends Component {
-  constructor (props) {
-    super(props)
-    this.state = { country: '' }
-    this.onChange = this.onChange.bind(this)
-  }
-
-  onChange (e) {
+const SelectCountry = ({ name, label, icon, currentUser }) => {
+  const [globalState, globalActions] = useStore()
+  const _onChange = (e) => {
     e.preventDefault()
-    this.setState({ country: e.target.value })
+    globalActions.setState({ country: e.target.value })
   }
 
-  render () {
-    const { name, label, icon, currentUser, error } = this.props
-    const classes = touched && error ? 'form-cintrol danger' : 'form-cintrol'
-    const iconClass = `fas fa-${icon}`
-    currentUser[name] = typeof currentUser[name] !== 'boolean' ? currentUser[name] : ''
+  const classes = globalState.error ? 'danger' : ''
+  const disabled = typeof globalState.currentUser[name] === 'string'
 
-    return (
-      <div className="form-group">
-        <label className="label" htmlFor="country"> {label }</label>
-        <div className="control has-icons-left">
-          <div className={classes}>
-            <select name={name} id="country" value={this.state.country || currentUser.country} onBlur={this.onChange} onChange={this.onChange}>
-              { countries.map((c, i) => {
-                return <option value={c.key} key={i}>{c.country}</option>
-              })
-              }
-            </select>
-          </div>
-          <span className="icon is-small is-left">
-            <i className={iconClass}></i>
-          </span>
-        </div>
-        <Error error={error} />
-      </div>
-    )
-  }
+  return (
+    <div>
+      <Label id={name}>{ label }</Label>
+      { !disabled ?
+        <Select
+          className={classes}
+          name="country"
+          id="country"
+          value={globalState.state.country}
+          onBlur={_onChange}
+          onChange={_onChange}>
+          { countries.map((c, i) => {
+            return <option value={c.key} key={i}>{c.country}</option>
+          })
+          }
+        </Select>
+        :
+        <Select
+          className={classes}
+          name="country"
+          id="country"
+          value={globalState.currentUser.country}
+          onBlur={_onChange}
+          disabled>
+          { countries.map((c, i) => {
+            return <option value={c.key} key={i}>{c.country}</option>
+          })
+          }
+        </Select>
+      }
+      <Error error={globalState.error} />
+    </div>
+  )
 }
 
 SelectCountry.propTypes = {

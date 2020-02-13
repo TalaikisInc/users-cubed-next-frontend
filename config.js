@@ -24,7 +24,6 @@ export const DPM_EMAIL = 'privacy@talaikis.com'
 export const DEFAULT_IMAGE = 'default.jpg'
 export const LOGO_ALT = 'Users Cubed'
 export const DEFAULT_OG_TYPE = 'company'
-export const UPDATE_FREQUENCY = '3 hours'
 export const DESCRIPTIONS = {
   homepage: `${TITLE}'s homepage.`,
   about: `${TITLE}'s about page.`,

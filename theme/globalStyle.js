@@ -85,10 +85,6 @@ export const GlobalStyle = createGlobalStyle`
     margin: 3em 2em 2em;
   }
 
-  .logo {
-    padding: .5em 1em;
-  }
-
   .social {
     color: #fff;
     padding: .5em;

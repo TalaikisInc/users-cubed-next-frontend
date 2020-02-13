@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 import { Dashboard } from 'styled-icons/boxicons-solid'
 import { SignIn, SignOut } from 'styled-icons/octicons'
@@ -31,12 +31,37 @@ DashboardLink.propTypes = {
   signout: PropTypes.func.isRequired
 }
 
+const SigninUrl = ({ currentPath, signinUrl }) => (
+  !currentPath.includes('/signin') ? <Button href={signinUrl} hollow>
+    <SignIn size="20" title={t('form.signin')} className="pr" />
+    { t('form.signin') }
+  </Button> : null
+)
+
+SigninUrl.propTypes = {
+  currentPath: PropTypes.string.isRequired,
+  signinUrl: PropTypes.string.isRequired
+}
+
+const SignupUrl = ({ currentPath, signupUrl }) => (
+  !currentPath.includes('/signup') ? <Button href={signupUrl}>
+    <AccountCircle size="20" title={t('form.signup')} className="pr" />
+    { t('form.signup') }
+  </Button> : null
+)
+
+SignupUrl.propTypes = {
+  currentPath: PropTypes.string.isRequired,
+  signupUrl: PropTypes.string.isRequired
+}
+
 const HeaderFull = ({ currentPath }) => {
   const [globalState, globalActions] = useStore()
+  const router = useRouter()
   const _signout = () => {
     if (globalState.currentUser && globalState.currentUser.email) {
       globalActions.signoutUser()
-      Router.push('/signed-out')
+      router.push('/signed-out')
     } else {
       globalActions.setError(t('error.signout'))
     }
@@ -51,14 +76,11 @@ const HeaderFull = ({ currentPath }) => {
     <Header>
       <Logo />
       { globalState.isAuthenticated ? <DashboardLink url={accUrl} signout={_signout} currentPath={currentPath} /> : <Fragment>
-        { !currentPath.includes('/signin') ? <Button href={signinUrl} dimmed>
-          <SignIn size="20" title={t('form.signin')} className="pr" />
-          { t('form.signin') }
-        </Button> : null }
-        { !currentPath.includes('/signup') ? <Button href={signupUrl}>
-          <AccountCircle size="20" title={t('form.signup')} className="pr" />
-          { t('form.signup') }
-        </Button> : null }
+        { currentPath.includes('/profile-edit') ? null : <Fragment>
+          <SignupUrl currentPath={currentPath} signupUrl={signupUrl} />
+          <SigninUrl currentPath={currentPath} signinUrl={signinUrl} />
+        </Fragment>
+        }
       </Fragment>
       }
     </Header>

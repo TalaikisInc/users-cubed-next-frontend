@@ -1,0 +1,17 @@
+node_modules/
+test/
+cypress/
+_resources/
+.next/
+out/
+.env.sample
+.env.development
+reload.sh
+slave_build.sh
+slave_start.sh
+package.lock.json
+.node-version
+.git/
+.gitignore
+.eslinrc.js
+commitlint.config.js

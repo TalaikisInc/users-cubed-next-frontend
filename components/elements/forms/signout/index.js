@@ -1,15 +1,16 @@
 import React from 'react'
-import Router from 'next/router'
-import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
 
 import useStore from 'store'
 
 const Signout = () => {
   const [globalState, globalActions] = useStore()
+  const router = useRouter()
+
   const _signout = () => {
     if (globalState.currentUser && globalState.currentUser.email) {
       globalActions.signoutUser()
-      Router.push('/signed-out')
+      router.push('/signed-out')
     } else {
       globalActions.setError('User is already signed out.')
     }

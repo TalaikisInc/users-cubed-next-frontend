@@ -33,7 +33,7 @@ Page.propTypes = {
     PropTypes.string,
     PropTypes.array,
     PropTypes.object
-  ]).isRequired
+  ])
 }
 
 export default withRouter(Page)
