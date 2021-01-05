@@ -38,7 +38,7 @@
     "@stripe/stripe-js": "^1.0.0-beta.8",
     "@styled-system/background": "^5.1.2",
     "auth0-js": "^9.12.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "cacheable-response": "^1.10.2",
     "es6-promisify": "^6.0.2",
     "express": "^4.17.1",
