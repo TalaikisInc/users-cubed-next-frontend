@@ -105,7 +105,7 @@
     "istanbul-lib-coverage": "^3.0.0",
     "lint-staged": "^10.0.4",
     "mocha": "^7.0.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "npm-check-updates": "^4.0.1",
     "nyc": "^15.0.0",
     "postcss": "^7.0.26",
