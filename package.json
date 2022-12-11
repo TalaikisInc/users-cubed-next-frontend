@@ -41,7 +41,7 @@
     "axios": "^0.19.2",
     "cacheable-response": "^1.10.2",
     "es6-promisify": "^6.0.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "frenchkiss": "^0.2.1",
     "highlight.js": "^9.18.0",
     "isemail": "^3.2.0",
